@@ -1,0 +1,20 @@
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px; 
+  }
+  
+  .product-card {
+    
+    text-align: center;
+  }
+  
+  .product-card h2 {
+    margin-top: 0;
+  }
+  
+  .product-card img {
+   
+    height: auto;
+  }
+  
