@@ -1,11 +1,14 @@
 import React from 'react';
-import ProductList from './Product/ProductList';
+import ProductList from './components/Products/ProductList';
+import { CartProvider } from './CartContext'; // Import the CartProvider
 
 function App() {
   return (
-    <div className="App">
-      <ProductList />
-    </div>
+    <CartProvider> {/* Wrap your app with CartProvider */}
+      <div className="App">
+        <ProductList />
+      </div>
+    </CartProvider>
   );
 }
 
