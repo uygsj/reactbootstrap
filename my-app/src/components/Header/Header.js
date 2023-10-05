@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <Navbar bg="dark" variant="dark">
-      <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
+      
       <Nav className="mr-auto">
+      <Navbar.Brand as={Link} to="/home">Home</Navbar.Brand>
+
         <Nav.Link as={Link} to="/store">Store</Nav.Link>
         <Nav.Link as={Link} to="/about">About</Nav.Link>
         <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
