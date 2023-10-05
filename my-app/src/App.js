@@ -7,6 +7,7 @@ import Cart from './components/Header/Cart';
 import AboutUs from './components/Header/AboutUs';
 import { CartProvider } from './CartContext';
 import Home from './components/Header/Home';
+import Movies from './components/Movies/Movies';
 
 function App() {
   return (
@@ -15,10 +16,11 @@ function App() {
         <div className="App">
           <Header />
           <Routes>
-            <Route path="/store" element={<Store/>} />
+            <Route path="/store" element={<Store />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/movies" element={<Movies />} />
           </Routes>
         </div>
       </CartProvider>
