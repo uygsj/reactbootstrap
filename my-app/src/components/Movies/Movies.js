@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import MovieList from "./MovieList";
+import LoadingMovie from "./LoadingMovie";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
+  
 
   async function fetchMovieHandler() {
     const response = await fetch('https://swapi.dev/api/films/');
@@ -25,7 +27,7 @@ const Movies = () => {
     fetchMovieHandler();
   }, []);
 
-  return (
+  return  movies.length===0 ? (<LoadingMovie/>) : (
     <div>
       <section>
         <div>
