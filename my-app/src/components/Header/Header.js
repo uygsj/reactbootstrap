@@ -1,16 +1,18 @@
-// Example in your header component
 import React from 'react';
-import { useCart } from '../../CartContext';;
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-function Header() {
-  const { totalQuantity } = useCart(); // Get the totalQuantity from CartContext
-
+const Header = () => {
   return (
-    <div className="header">
-      {/* ... */}
-      <span className="cart-icon">Cart ({totalQuantity})</span>
-    </div>
+    <Navbar bg="dark" variant="dark">
+      <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
+      <Nav className="mr-auto">
+        <Nav.Link as={Link} to="/store">Store</Nav.Link>
+        <Nav.Link as={Link} to="/about">About</Nav.Link>
+        <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
+      </Nav>
+    </Navbar>
   );
-}
+};
 
 export default Header;
