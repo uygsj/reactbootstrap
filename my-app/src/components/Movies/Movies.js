@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import MovieList from "./MovieList";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isRetrying, setIsRetrying] = useState(false);
 
-  async function fetchMovies() {
+  const fetchMovies = useCallback(async () => {
+    
+
     try {
       const response = await fetch('https://swapi.dev/api/films/');
-      
+
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
 
       const data = await response.json();
-  
+
       const transformedMovies = data.results.map((movieData) => {
         return {
           id: movieData.episode_id,
@@ -25,7 +27,7 @@ const Movies = () => {
           releaseDate: movieData.release_date,
         };
       });
-  
+
       setMovies(transformedMovies);
       setError(null);
     } catch (err) {
@@ -40,11 +42,7 @@ const Movies = () => {
       }, 5000);
     }
     setIsLoading(false);
-  }
-
-  useEffect(() => {
-    fetchMovies();
-  }, []);
+  }, [isRetrying]);
 
   const handleRetryClick = () => {
     setIsRetrying(true);
@@ -56,6 +54,10 @@ const Movies = () => {
     setIsRetrying(false);
     setError("Retry canceled");
   };
+
+  useEffect(() => {
+    fetchMovies();
+  }, [fetchMovies]);
 
   let content = <p>Found no movies.</p>;
 
