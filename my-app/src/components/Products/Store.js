@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import { useCart } from '../../CartContext'; 
-import Cart from '../Header/Cart'// Import useCart from CartContext
+import Cart from '../Header/Cart';
 import ShimmerCard from './ShimmerCard';
+import { Link } from 'react-router-dom'; // Import Link
 
 const productsArr = [
   {
@@ -46,18 +47,19 @@ function ProductList() {
       <Row>
         <Col xs={12} sm={12} md={12} lg={9}>
           <Row>
-            {productsArr.length === 0 ? ( // Check if productsArr is empty
-              // Render ShimmerCard while data is loading
+            {productsArr.length === 0 ? (
               <Col xs={12} sm={6} md={6} lg={6}>
                 <ShimmerCard />
               </Col>
             ) : (
-              // Render product cards when data is available
               productsArr.map((product) => (
                 <Col key={product.title} xs={12} sm={6} md={6} lg={6}>
                   <div className="product-item">
-                    <Image src={product.imageUrl} alt={product.title} fluid />
-                    <div>{product.title}</div>
+                    {/* Wrap product image and title with Link */}
+                    <Link to={`/product/${product.id}`}>
+                      <Image src={product.imageUrl} alt={product.title} fluid />
+                      <div>{product.title}</div>
+                    </Link>
                     <div>${product.price}</div>
                     <Button onClick={() => addToCart(product)}>Add to Cart</Button>
                   </div>
