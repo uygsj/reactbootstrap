@@ -5,7 +5,7 @@ const About = () => {
         <h1 className="font-bold text-2xl p-3">ABOUT</h1>
         </div>
         <div className="flex justify-between">
-        <img className="w-50 p-5 m-10 "
+        <img className="w-50 p-5 m-10  rounded-full "
         src="https://prasadyash2411.github.io/ecom-website/img/Band%20Members.png" alt="this is aboutpage"
         />
         <h3>

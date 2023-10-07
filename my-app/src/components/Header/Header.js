@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+
 const Header = () => {
   return (
     <Navbar bg="dark" variant="dark">
@@ -14,6 +15,7 @@ const Header = () => {
         <Nav.Link as={Link} to="/store">Store</Nav.Link>
         <Nav.Link as={Link} to="/about">About</Nav.Link>
         <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
+        <Nav.Link as={Link} to="/contact">Contact Us</Nav.Link>
       </Nav>
     </Navbar>
   );

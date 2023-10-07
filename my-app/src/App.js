@@ -8,6 +8,8 @@ import AboutUs from './components/Header/AboutUs';
 import { CartProvider } from './CartContext';
 import Home from './components/Header/Home';
 import Movies from './components/Movies/Movies';
+import Contact from "./components/Header/Contact";
+//import ShimmerCard from "./src/Product/ShimmerCard";
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/home" element={<Home />} />
             <Route path="/movies" element={<Movies />} />
+            <Route path="/contact" element={<Contact/>} />
           </Routes>
         </div>
       </CartProvider>
