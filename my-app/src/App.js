@@ -8,7 +8,8 @@ import { CartProvider } from './CartContext';
 import Home from './components/Header/Home';
 import Movies from './components/Movies/Movies';
 import Contact from './components/Header/Contact';
-import ProductDetails from './components/Products/ProductDetail'; // Import ProductDetails component
+import ProductDetails from './components/Products/ProductDetail';
+import Login from './components/Header/Login';
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/product/:productId" element={<ProductDetails />} /> {/* Product details route */}
+            <Route path="/product/:productId" element={<ProductDetails />} />
+            
+            <Route path="/login" element={<Login/>} />
           </Routes>
         </div>
       </CartProvider>
