@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -22,11 +23,10 @@ const Login = () => {
     const enteredPassword = passwordInputRef.current.value;
     let url;
 
-    if (isLogin) {
-      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyBZnsryIn3EL7dA9W-HgnP0X6EXabzgASU'; // Replace with your API key
+    if (isLogin) {url='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1b-lvn7ZcqvlxQGq9ZwaUnlNSq7TY6IQ'; // Replace with your API key
     } else {
       url =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBZnsryIn3EL7dA9W-HgnP0X6EXabzgASU'
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA1b-lvn7ZcqvlxQGq9ZwaUnlNSq7TY6IQ'
     }
 
     fetch(url, {
@@ -52,6 +52,7 @@ const Login = () => {
           console.log('Login Completed');
           localStorage.setItem('email', enteredEmail);
           authCtx.login(data.idToken);
+          console.log(data.idToken)
           alert('Log In Successful');
         } else {
           console.log('Sign up Completed');
