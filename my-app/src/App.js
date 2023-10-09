@@ -10,9 +10,11 @@ import Movies from './components/Movies/Movies';
 import Contact from './components/Header/Contact';
 import ProductDetails from './components/Products/ProductDetail';
 import Login from './components/Header/Login';
+import { AuthContextProvider } from './components/Products/Store/AuthContext';
 
 function App() {
   return (
+    <AuthContextProvider>
     <Router>
       <CartProvider>
         <div className="App">
@@ -31,6 +33,7 @@ function App() {
         </div>
       </CartProvider>
     </Router>
+    </AuthContextProvider>
   );
 }
 

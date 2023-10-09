@@ -1,16 +1,17 @@
-
 import React, { useState, useRef, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/esm/Container';
-import AuthContext from '../Products/Store/AuthContext';
+import Container from 'react-bootstrap/Container';
+import AuthContext from '../Products/Store/AuthContext'; // Adjust the path based on your project structure
+
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Login = () => {
   const authCtx = useContext(AuthContext);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-
   const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate(); // Use useNavigate for navigation
 
   const switchAuthModeHandler = () => {
     setIsLogin((prev) => !prev);
@@ -23,10 +24,10 @@ const Login = () => {
     const enteredPassword = passwordInputRef.current.value;
     let url;
 
-    if (isLogin) {url='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1b-lvn7ZcqvlxQGq9ZwaUnlNSq7TY6IQ'; // Replace with your API key
+    if (isLogin) {
+      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1b-lvn7ZcqvlxQGq9ZwaUnlNSq7TY6IQ';
     } else {
-      url =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA1b-lvn7ZcqvlxQGq9ZwaUnlNSq7TY6IQ'
+      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA1b-lvn7ZcqvlxQGq9ZwaUnlNSq7TY6IQ';
     }
 
     fetch(url, {
@@ -40,7 +41,6 @@ const Login = () => {
     })
       .then((res) => {
         if (!res.ok) {
-          // Handle error response from the server
           return res.json().then((data) => {
             throw new Error(data.error.message);
           });
@@ -52,7 +52,7 @@ const Login = () => {
           console.log('Login Completed');
           localStorage.setItem('email', enteredEmail);
           authCtx.login(data.idToken);
-          console.log(data.idToken)
+          console.log(data);
           alert('Log In Successful');
         } else {
           console.log('Sign up Completed');
@@ -60,13 +60,20 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        // Handle and display the error to the user as an alert
         alert(error.message);
       });
   };
 
+  const logoutHandler = () => {
+    authCtx.logout();
+    localStorage.removeItem('email');
+    navigate('/home'); 
+  };
+
   return (
     <Container className="pt-5">
+      
+       <>
       <Form onSubmit={submitHandler} className="pt-3">
         <h1 className="text-center">{isLogin ? 'Log In' : 'Sign Up'}</h1>
         <Form.Group className="mb-3">
@@ -84,10 +91,11 @@ const Login = () => {
         </Button>
         <div className="text-center pt-3">
           <Button variant="secondary" onClick={switchAuthModeHandler}>
-            {isLogin ? 'Create new account' : 'Login with existing account'}
+            {isLogin ? 'Create a new account' : 'Login with an existing account'}
           </Button>
         </div>
       </Form>
+      </>
     </Container>
   );
 };
