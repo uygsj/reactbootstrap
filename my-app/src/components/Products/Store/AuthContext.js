@@ -8,7 +8,7 @@ const AuthContext = createContext({
   logout: () => {},
 });
 
-export const AuthContextProvider = (props) => {
+ const AuthContextProvider = (props) => {
   const initialToken = localStorage.getItem("token");
   const [token, setToken] = useState(initialToken);
   const userLoggedIn = !!token;
@@ -37,8 +37,8 @@ export const AuthContextProvider = (props) => {
   );
 };
 
-export const useAuth = () => {
+ const useAuth = () => {
   return useContext(AuthContext);
 };
 
-export default AuthContext;
+export { AuthContext as default, AuthContextProvider, useAuth };

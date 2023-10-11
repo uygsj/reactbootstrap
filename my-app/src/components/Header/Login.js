@@ -4,14 +4,11 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import AuthContext from '../Products/Store/AuthContext'; // Adjust the path based on your project structure
 
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-
 const Login = () => {
   const authCtx = useContext(AuthContext);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const [isLogin, setIsLogin] = useState(true);
-  const navigate = useNavigate(); // Use useNavigate for navigation
 
   const switchAuthModeHandler = () => {
     setIsLogin((prev) => !prev);
@@ -64,37 +61,31 @@ const Login = () => {
       });
   };
 
-  const logoutHandler = () => {
-    authCtx.logout();
-    localStorage.removeItem('email');
-    navigate('/home'); 
-  };
-
   return (
     <Container className="pt-5">
-      
-       <>
-      <Form onSubmit={submitHandler} className="pt-3">
-        <h1 className="text-center">{isLogin ? 'Log In' : 'Sign Up'}</h1>
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="email">Email address</Form.Label>
-          <Form.Control ref={emailInputRef} id="email" type="email" placeholder="Enter email" />
-        </Form.Group>
+      <>
+        <Form onSubmit={submitHandler} className="pt-3">
+          <h1 className="text-center">{isLogin ? 'Log In' : 'Sign Up'}</h1>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="email">Email address</Form.Label>
+            <Form.Control ref={emailInputRef} id="email" type="email" placeholder="Enter email" />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="password">Password</Form.Label>
-          <Form.Control ref={passwordInputRef} id="password" type="password" placeholder="Password" />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="password">Password</Form.Label>
+            <Form.Control ref={passwordInputRef} id="password" type="password" placeholder="Password" />
+          </Form.Group>
 
-        <Button variant="primary" type="submit">
-          {isLogin ? 'Log In' : 'Sign Up'}
-        </Button>
-        <div className="text-center pt-3">
-          <Button variant="secondary" onClick={switchAuthModeHandler}>
-            {isLogin ? 'Create a new account' : 'Login with an existing account'}
+          <Button variant="primary" type="submit">
+            {isLogin ? 'Log In' : 'Sign Up'}
           </Button>
-        </div>
-      </Form>
+
+          <div className="text-center pt-3">
+            <Button variant="secondary" onClick={switchAuthModeHandler}>
+              {isLogin ? 'Create a new account' : 'Login with an existing account'}
+            </Button>
+          </div>
+        </Form>
       </>
     </Container>
   );

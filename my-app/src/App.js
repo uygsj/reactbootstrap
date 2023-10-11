@@ -11,7 +11,8 @@ import Contact from './components/Header/Contact';
 import ProductDetails from './components/Products/ProductDetail';
 import Login from './components/Header/Login';
 import { AuthContextProvider } from './components/Products/Store/AuthContext';
-
+import ChangePasswordForm from './components/Header/ChangePasswordForm'
+//import ProfileForm from './components/Header/ChangePasswordForm';
 function App() {
   return (
     <AuthContextProvider>
@@ -20,16 +21,22 @@ function App() {
         <div className="App">
           <Header />
           <Routes>
-            <Route path="/store" element={<Store />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/product/:productId" element={<ProductDetails />} />
-            
-            <Route path="/login" element={<Login/>} />
-          </Routes>
+  
+  <Route path="/store" element={<Store />} />
+  <Route path="/cart" element={<Cart />} />
+  <Route path="/about" element={<AboutUs />} />
+  <Route path="/home" element={<Home />} />
+  <Route path="/movies" element={<Movies />} />
+  <Route path="/contact" element={<Contact />} />
+  <Route path="/product/:productId" element={<ProductDetails />} />
+  <Route path="/login" element={<Login />} />
+  <Route path="/changepasswordform" element={<ChangePasswordForm/>} />
+  
+  
+       
+       
+</Routes>
+
         </div>
       </CartProvider>
     </Router>
