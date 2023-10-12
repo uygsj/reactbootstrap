@@ -22,7 +22,7 @@ function App() {
           <Header />
           <Routes>
   
-  <Route path="/store" element={<Store />} />
+          <Route path="/store" element={<Store />} />
   <Route path="/cart" element={<Cart />} />
   <Route path="/about" element={<AboutUs />} />
   <Route path="/home" element={<Home />} />
@@ -31,10 +31,10 @@ function App() {
   <Route path="/product/:productId" element={<ProductDetails />} />
   <Route path="/login" element={<Login />} />
   <Route path="/changepasswordform" element={<ChangePasswordForm/>} />
-  
-  
-       
-       
+
+
+
+
 </Routes>
 
         </div>
@@ -43,5 +43,4 @@ function App() {
     </AuthContextProvider>
   );
 }
-
 export default App;

@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <>
-      {authCtx.isLoggedIn ? (
+  {authCtx.isLoggedIn ? (
         <>
           <Link to="/profile" className="btn btn-primary mr-2">Profile</Link>
           <button className="btn btn-primary mr-2" onClick={logoutHandler}>
@@ -38,5 +38,4 @@ const Header = () => {
     </>
   );
 };
-
 export default Header;

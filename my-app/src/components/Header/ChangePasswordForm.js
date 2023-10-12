@@ -9,13 +9,12 @@ const ChangePasswordForm = () => {
   const navigate = useNavigate();
   const newPasswordInputRef = useRef();
   const authCtx = useContext(AuthContext);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState(null); // State to track error message
+  const [error, setError] = useState(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
     const enteredPassword = newPasswordInputRef.current.value;
-    fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA1b-lvn7ZcqvlxQGq9ZwaUnlNSq7TY6IQ', {
+    fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyB_dkiZLarsll9ax2EExsD9wzsvIZ_wSAo', {
       method: 'POST',
       body: JSON.stringify({
         idToken: authCtx.token,
@@ -27,18 +26,22 @@ const ChangePasswordForm = () => {
       },
     })
       .then((res) => {
-        if (res.ok) {
-          setIsSuccess(true);
-        } else {
+        if (!res.ok) {
           return res.json().then((data) => {
             setError(data.error.message); // Set error message if the request fails
-          });
+            throw new Error(data.error.message); // Also throw an error to be caught in the next .catch block
+          })
         }
+        
+        return res.json();
       })
-      .then((data) => {
-        if (isSuccess) {
-          navigate('/');
-        }
+      .then(() => {
+        alert('Password changed successfully!');
+        navigate('/');
+      })
+      .catch((error) => {
+        // Error will be caught here if there was an error during the fetch request
+        console.error('Error:', error);
       });
   };
 
@@ -61,7 +64,6 @@ const ChangePasswordForm = () => {
         </div>
       </Form>
       {error && <p>Error: {error}</p>}
-      {isSuccess && alert('Password changed successfully!')}
     </Container>
   );
 };

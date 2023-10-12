@@ -22,9 +22,9 @@ const Login = () => {
     let url;
 
     if (isLogin) {
-      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1b-lvn7ZcqvlxQGq9ZwaUnlNSq7TY6IQ';
+      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB_dkiZLarsll9ax2EExsD9wzsvIZ_wSAo';
     } else {
-      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA1b-lvn7ZcqvlxQGq9ZwaUnlNSq7TY6IQ';
+      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB_dkiZLarsll9ax2EExsD9wzsvIZ_wSAo';
     }
 
     fetch(url, {
