@@ -8,6 +8,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     authCtx.logout();
+    localStorage.removeItem('authToken'); // Remove the token from localStorage on logout
   };
 
   return (

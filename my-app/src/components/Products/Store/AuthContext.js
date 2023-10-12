@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 
 const AuthContext = createContext({
   token: "",
@@ -7,19 +7,29 @@ const AuthContext = createContext({
   logout: () => {},
 });
 
-export const AuthContextProvider = (props) => {
-  const initialToken = localStorage.getItem("token");
+const AuthContextProvider = (props) => {
+  const initialToken = localStorage.getItem("authToken");
   const [token, setToken] = useState(initialToken);
+
+  // Calculate the isLoggedIn value based on the presence of the token
   const userLoggedIn = !!token;
 
-  const loginHandler = (token) => {
-    setToken(token);
-    localStorage.setItem("token", token);
-  };
+  useEffect(() => {
+    // Initialize token from localStorage when the app loads
+    const storedToken = localStorage.getItem('authToken');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+
+ // Inside your loginHandler function
+const loginHandler = (token) => {
+  setToken(token);
+  localStorage.setItem('authToken', token); // Store the token in localStorage
+};
 
   const logoutHandler = () => {
-    setToken("");
-    localStorage.removeItem("token");
+    localStorage.removeItem("authToken");
   };
 
   const contextValue = {
@@ -41,3 +51,4 @@ export const useAuth = () => {
 };
 
 export default AuthContext;
+export { AuthContextProvider };

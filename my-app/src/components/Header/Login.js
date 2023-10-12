@@ -16,17 +16,16 @@ const Login = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
     let url;
-
+  
     if (isLogin) {
       url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB_dkiZLarsll9ax2EExsD9wzsvIZ_wSAo';
     } else {
       url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB_dkiZLarsll9ax2EExsD9wzsvIZ_wSAo';
     }
-
+  
     fetch(url, {
       method: 'POST',
       body: JSON.stringify({
@@ -48,6 +47,7 @@ const Login = () => {
         if (isLogin) {
           console.log('Login Completed');
           localStorage.setItem('email', enteredEmail);
+          localStorage.setItem('authToken', data.idToken); // Store the token in localStorage
           authCtx.login(data.idToken);
           console.log(data);
           alert('Log In Successful');
@@ -60,6 +60,9 @@ const Login = () => {
         alert(error.message);
       });
   };
+  
+ 
+     
 
   return (
     <Container className="pt-5">
