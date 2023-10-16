@@ -1,6 +1,6 @@
 import React, { useRef, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../Products/Store/AuthContext';
+import AuthContext from '../Products/Stored/AuthContext';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';

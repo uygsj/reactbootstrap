@@ -2,8 +2,7 @@ import React, { useState, useRef, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
-import AuthContext from '../Products/Store/AuthContext'; // Adjust the path based on your project structure
-
+import {AuthContext} from '../Products/Stored/AuthContext';
 const Login = () => {
   const authCtx = useContext(AuthContext);
   const emailInputRef = useRef();
@@ -26,20 +25,21 @@ const Login = () => {
       url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB_dkiZLarsll9ax2EExsD9wzsvIZ_wSAo';
     }
   
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-        returnSecureToken: true,
-      }),
-      headers: { 'Content-Type': 'application/json' },
-    })
+    
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      })
       .then((res) => {
         if (!res.ok) {
           return res.json().then((data) => {
             throw new Error(data.error.message);
-          });
+          })
         }
         return res.json();
       })
@@ -47,8 +47,9 @@ const Login = () => {
         if (isLogin) {
           console.log('Login Completed');
           localStorage.setItem('email', enteredEmail);
-          localStorage.setItem('authToken', data.idToken); // Store the token in localStorage
-          authCtx.login(data.idToken);
+          const expirationTime = 300000; // 5 minutes
+          localStorage.setItem('authToken', data.idToken);
+          authCtx.login(data.idToken, expirationTime); // Pass expiration time
           console.log(data);
           alert('Log In Successful');
         } else {
@@ -59,11 +60,8 @@ const Login = () => {
       .catch((error) => {
         alert(error.message);
       });
-  };
-  
- 
-     
-
+    };
+    
   return (
     <Container className="pt-5">
       <>
